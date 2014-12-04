@@ -1,0 +1,235 @@
+//
+//  LtGovernorViewController.m
+//  ultc
+//
+//  Created by shallowsummer on 9/17/13.
+//
+//
+
+#import "LtGovernorViewController.h"
+#import "AppDelegate.h"
+#import "FMDatabase.h"
+#import "FMResultSet.h"
+#import "WRUtilities.h"
+#import "MapTableViewCell.h"
+#import "AddressTableViewCell.h"
+#import "SingleLineTableViewCell.h"
+
+
+@interface LtGovernorViewController ()
+
+@property (nonatomic, strong) NSMutableDictionary * dict;
+@property (nonatomic, strong) NSMutableArray * fieldOrder;
+
+@end
+
+@implementation LtGovernorViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+self.title = @"Lt. Governor";
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.fieldOrder = [[NSMutableArray alloc] init];
+    
+    // This is probably important
+    
+    FMDatabase * db = [[AppDelegate getAppDelegate] database ];
+    NSString * sqlString = [NSString stringWithFormat:@"SELECT * FROM info"];
+    FMResultSet * s = [ db executeQuery:sqlString];
+    if([s next]){
+        
+        self.dict = [NSMutableDictionary dictionary];
+        NSNumber * number = [NSNumber numberWithInt:[s intForColumn:@"id"]];
+        [self.dict setObject:number forKey:@"id"];
+    
+        NSArray * textFields = @[@"lt_governor",
+                                 @"lt_governor_address",
+                                 @"lt_governor_city",
+                                 @"lt_governor_state",
+                                 @"lt_governor_zip",
+                                 @"lt_governor_phone",
+                                 @"lt_governor_fax"
+                                 ];
+        
+        for(NSString * field in textFields){
+            [self.dict setObject:[s stringForColumn:field] forKey:field];
+        }
+        
+        
+        [self.fieldOrder addObject:@"name"];
+        
+        if( ! [(NSString *) [self.dict objectForKey:@"lt_governor_address"] isEqual:@""] ) {
+            [self.fieldOrder addObject:@"map"];
+        }
+        
+        [self.fieldOrder addObject:@"lt_governor"];
+        
+        if( ! [(NSString *) [self.dict objectForKey:@"lt_governor_address"] isEqual:@""] ) {
+            [self.fieldOrder addObject:@"lt_governor_address"];
+        }
+        
+        if( ! [(NSString *) [self.dict objectForKey:@"lt_governor_phone"] isEqual:@""] ) {
+            [self.fieldOrder addObject:@"lt_governor_phone"];
+        }
+        
+        if( ! [(NSString *) [self.dict objectForKey:@"lt_governor_fax"] isEqual:@""] ) {
+            [self.fieldOrder addObject:@"lt_governor_fax"];
+        }
+        
+        //self.title = [self.dict objectForKey:@"name"];
+        
+    }
+
+    }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+}
+
+#pragma mark UITableView Delegate Methods
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [self.fieldOrder count];
+    
+    //number of rows in section
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell * cell;
+    
+    NSString * field = [self.fieldOrder objectAtIndex:[indexPath row]];
+    
+    if([field isEqual:@"name"]){
+    
+        TitleTableViewCell * titleCell = [WRUtilities getViewFromNib:@"TitleTableViewCell" class:[TitleTableViewCell class]];
+        titleCell.title.text = @"Lt Governor";
+        titleCell.delegate = self;
+        [titleCell selectIfFavorited:self];
+        
+        cell=titleCell;
+        
+    } else  if([field isEqual:@"lt_governor"]){
+        SingleLineTableViewCell * singleCell = [WRUtilities getViewFromNib:@"SingleLineTableViewCell" class:[SingleLineTableViewCell class]];
+        singleCell.title.text = @"Name:";
+        singleCell.content.text = [self.dict objectForKey:@"lt_governor"];
+        cell=singleCell;
+        
+    }
+    
+    else if([field isEqual:@"map"]){
+        MapTableViewCell * mapCell = [WRUtilities getViewFromNib:@"MapTableViewCell" class:[MapTableViewCell class]];
+        cell = mapCell;
+        
+        //NSString * address = [self.dict objectForKey:@"lt_governor_address"];
+        NSString * address = [NSString stringWithFormat:@"%@, %@, %@, %@", [self.dict objectForKey:@"lt_governor_address"], [self.dict objectForKey:@"lt_governor_city"], [self.dict objectForKey:@"lt_governor_state"], [self.dict objectForKey:@"lt_governor_zip"]];
+        
+        [self.geocoder geocodeAddressString:address
+                          completionHandler:^(NSArray* placemarks, NSError* error){
+                              if([placemarks count] > 0) {
+                                  CLPlacemark * pm = [placemarks objectAtIndex:0];
+                                  MKPlacemark *placemark = [[MKPlacemark alloc]
+                                                            initWithCoordinate:pm.location.coordinate
+                                                            addressDictionary:pm.addressDictionary];
+                                  [mapCell.mapView addAnnotation:placemark];
+                                  
+                                  MKCoordinateRegion region;
+                                  region.span.latitudeDelta = .1;
+                                  region.span.longitudeDelta = .1;
+                                  region.center.latitude = pm.location.coordinate.latitude ;
+                                  region.center.longitude = pm.location.coordinate.longitude ;
+                                  [mapCell.mapView  setRegion:region animated:YES];
+                                  
+                              }
+                          }];
+
+        
+    } else if([field isEqual:@"lt_governor_address"]){
+        
+        AddressTableViewCell * addressCell = [WRUtilities getViewFromNib:@"AddressTableViewCell" class:[AddressTableViewCell class]];
+        addressCell.title.text = @"Address";
+        addressCell.addressLine1.text = [self.dict objectForKey:@"lt_governor_address"];
+        addressCell.addressLine2.text = [NSString stringWithFormat:@"%@, %@, %@", [self.dict objectForKey:@"lt_governor_city"], [self.dict objectForKey:@"lt_governor_state"], [self.dict objectForKey:@"lt_governor_zip"]];
+        
+      
+        cell = addressCell;
+        
+    }
+    
+    else if([field isEqual:@"lt_governor_phone"]){
+        SingleLineTableViewCell * singleCell = [WRUtilities getViewFromNib:@"SingleLineTableViewCell" class:[SingleLineTableViewCell class]];
+        singleCell.title.text = @"Phone:";
+        singleCell.content.text = [self.dict objectForKey:@"lt_governor_phone"];
+        cell=singleCell;
+        
+    } else if([field isEqual:@"lt_governor_fax"]){
+        SingleLineTableViewCell * singleCell = [WRUtilities getViewFromNib:@"SingleLineTableViewCell" class:[SingleLineTableViewCell class]];
+        singleCell.title.text = @"Fax:";
+        singleCell.content.text = [self.dict objectForKey:@"lt_governor_fax"];
+        cell=singleCell;
+        
+    }     
+    else {
+        
+    }
+    
+    if(cell == NULL){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"IDENTIFIER"];
+    }
+    
+    [self setUserInteractionForField:field withCell:cell];
+
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    float height = 40;
+    
+    NSString * field = [self.fieldOrder objectAtIndex:[indexPath row]];
+    
+    if ([field isEqual:@"lt_governor"]){
+        height = 57;
+        
+    }
+    
+    else if([field isEqual:@"map"]){
+        height = 212;
+        
+    } else if([field isEqual:@"lt_governor_address"]){
+        height = 78;
+        
+    } else if([field isEqual:@"lt_governor_phone"]){
+        height = 57;
+        
+    } else if([field isEqual:@"lt_governor_fax"]){
+        height = 57;
+        
+    } else {
+        
+    }
+    
+    
+    return height;
+}
+
+
+
+@end

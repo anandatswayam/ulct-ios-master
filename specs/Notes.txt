@@ -1,0 +1,27 @@
+# Dashboard
+
+In the dashboard view the star nav icon should be highlighted. The first screen should be a table view with two rows — Saved Entries and Recently Viewed. Each opens to a new table view, the title bar changes, and a back button appears. Recently viewed shows the last 10 entries in the user's history. Saved Entries shows all saved entries in alphabetical order by title.
+
+# Directory
+
+In the directory view the book icon should be highlighted. The first screen of the directory view is the directory index. My mockup doesn't show all the categories, but it will correspond to the structure of the web app's navigation and should be nested. Each entry opens as it's own screen. The title bar will show it's category. The entries should should show all the same info as the web app, including maps. Addresses, phone numbers, and emails, should be linked to the appropriate apps (maps, phone, mail). All entries should be savable via a star icon near the title. Unsaved is a grey star, saved is a yellow. Tapping the star toggles the save status with a beeping sound.
+
+# Settings
+
+In the settings view the gear icon is highlighted. It contains a table row for help, a log out button, and the version info. Logging out returns the user to the login screen.
+
+# Search
+
+The search bar is accessible in the dashboard and directory sections by dragging down on the content area after it's scrolled all the way to the top. Typing a query updates the results on-the-fly. Clearing the search returns the view to whatever it was before the search started.
+
+# Login
+
+Requires username and password. Once the user is logged in their account can stay logged in indefinitely until they manually log out or until their subscription expires.
+
+# iPad/Tablets
+
+On tablets the look is very similar, the difference bing that the menu stays omnipresent on the left side of the screen and the content displays on the right. The menu should be about 320 px wide.
+
+# Formatting
+
+Be careful to measure the pixel size of my mockups and match it as closely as possible. Let me know if anything is difficult to replicate on the device.

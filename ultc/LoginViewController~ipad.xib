@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="password" destination="1xs-p8-Sdo" id="CiO-At-WiL"/>
+                <outlet property="username" destination="0pD-PX-H18" id="Zb7-58-tEI"/>
+                <outlet property="view" destination="GhB-xA-czJ" id="ATX-GF-Gsd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="GhB-xA-czJ">
+            <rect key="frame" x="0.0" y="0.0" width="1004" height="768"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Log in with your ULCT Directory username and password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="233" translatesAutoresizingMaskIntoConstraints="NO" id="2PV-Ho-nGJ">
+                    <rect key="frame" x="386" y="331" width="233" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1xs-p8-Sdo" customClass="JMTextField">
+                    <rect key="frame" x="362" y="183" width="281" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                    <connections>
+                        <action selector="didEndOnExit:" destination="-1" eventType="editingDidEndOnExit" id="E7j-TL-qVr"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0pD-PX-H18" customClass="JMTextField">
+                    <rect key="frame" x="362" y="127" width="281" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                    <connections>
+                        <action selector="didEndOnExit:" destination="-1" eventType="editingDidEndOnExit" id="fGc-RJ-OKx"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfR-Tb-3fK">
+                    <rect key="frame" x="362" y="250" width="281" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                    <state key="normal" title="Log In" backgroundImage="button-login.png">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didTapLoginButton:" destination="-1" eventType="touchUpInside" id="wx0-NR-8NL"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2PV-Ho-nGJ" firstAttribute="top" secondItem="EfR-Tb-3fK" secondAttribute="bottom" constant="26" id="3fn-wC-W1T"/>
+                <constraint firstAttribute="centerX" secondItem="0pD-PX-H18" secondAttribute="centerX" id="E7x-E7-K7h"/>
+                <constraint firstAttribute="centerX" secondItem="2PV-Ho-nGJ" secondAttribute="centerX" id="X9v-nv-Z6M"/>
+                <constraint firstItem="EfR-Tb-3fK" firstAttribute="top" secondItem="GhB-xA-czJ" secondAttribute="top" constant="250" id="Z3D-em-6dj"/>
+                <constraint firstAttribute="centerX" secondItem="EfR-Tb-3fK" secondAttribute="centerX" id="ZW2-n5-gsI"/>
+                <constraint firstItem="EfR-Tb-3fK" firstAttribute="leading" secondItem="0pD-PX-H18" secondAttribute="leading" id="aOj-fk-bZr"/>
+                <constraint firstItem="EfR-Tb-3fK" firstAttribute="leading" secondItem="1xs-p8-Sdo" secondAttribute="leading" id="c5y-mH-A7R"/>
+                <constraint firstItem="1xs-p8-Sdo" firstAttribute="top" secondItem="0pD-PX-H18" secondAttribute="bottom" constant="26" id="eew-zR-tqM"/>
+                <constraint firstItem="EfR-Tb-3fK" firstAttribute="top" secondItem="1xs-p8-Sdo" secondAttribute="bottom" constant="37" id="lxb-E3-RGs"/>
+                <constraint firstAttribute="centerX" secondItem="1xs-p8-Sdo" secondAttribute="centerX" id="xYy-nl-cmA"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="button-login.png" width="281" height="55"/>
+    </resources>
+</document>

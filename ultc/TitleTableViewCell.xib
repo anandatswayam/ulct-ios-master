@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h14-cl-RVI" customClass="TitleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h14-cl-RVI" id="XLs-GV-9Xx">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                        <rect key="frame" x="288" y="9" width="26" height="26"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" image="button-favorites.png">
+                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="button-favorites-select.png"/>
+                        <state key="highlighted">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didTapButton:" destination="h14-cl-RVI" eventType="touchUpInside" id="pZv-kN-Uio"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="South Yoggy" lineBreakMode="tailTruncation" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                        <rect key="frame" x="11" y="1" width="269" height="43"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="-1" id="1kF-QX-yaX"/>
+                    <constraint firstItem="4" firstAttribute="leading" secondItem="XLs-GV-9Xx" secondAttribute="leading" constant="11" id="8rq-ry-V2S"/>
+                    <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="40" id="aDy-Bu-AYd"/>
+                    <constraint firstItem="4" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" id="eql-ud-M8a"/>
+                    <constraint firstItem="4" firstAttribute="top" secondItem="XLs-GV-9Xx" secondAttribute="top" constant="1" id="urw-Ct-afK"/>
+                    <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" constant="6" id="vgC-c3-T1F"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="button" destination="3" id="low-qb-qPG"/>
+                <outlet property="title" destination="4" id="fFu-mR-LWO"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="button-favorites-select.png" width="26" height="26"/>
+        <image name="button-favorites.png" width="26" height="26"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

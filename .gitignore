@@ -1,0 +1,6 @@
+Podfile.lock
+Pods/
+ultc.xcodeproj/project.xcworkspace/
+ultc.xcodeproj/xcuserdata/
+ultc.xcworkspace/xcuserdata/
+.DS_Store

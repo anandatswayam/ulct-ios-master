@@ -1,0 +1,6 @@
+[submodule "ObjectiveEntity"]
+	path = ObjectiveEntity
+	url = git@github.com:paracycle/ObjectiveEntity.git
+[submodule "nv-ios-digest"]
+	path = nv-ios-digest
+	url = git@github.com:TakahikoKawasaki/nv-ios-digest.git
